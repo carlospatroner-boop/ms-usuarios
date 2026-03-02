@@ -9,5 +9,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 8092
   type: LoadBalancer # Esto te dará una IP pública en Azure
