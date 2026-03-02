@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-dashboard
+  namespace: default
+  labels:
+    app: ms-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-dashboard
+  template:
+    metadata:
+      labels:
+        app: ms-dashboard
+    spec:
+      containers:
+        - name: ms-dashboard
+          image: carlospatronerboop/ms-dashboard:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          env:
+            # Aquí le decimos que busque al servicio Java por su nombre DNS interno
+            - name: API_URL
+              value: "http://ms-usuarios-service:80/api/usuarios"
+      imagePullSecrets:
+        - name: ghcr-secret
