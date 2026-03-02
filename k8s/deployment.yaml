@@ -18,7 +18,8 @@ spec:
       containers:
         - name: ms-usuarios
           # Usaremos GitHub Container Registry
-          image: ghcr.io/carlospatroner-boop/ms-usuarios:latest
+          image: carlospatronerboop/ms-usuarios:latest
+
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
