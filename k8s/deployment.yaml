@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-usuarios
+  namespace: default
+  labels:
+    app: ms-usuarios
+spec:
+  replicas: 1 # Mantenemos 1 réplica para ahorrar créditos
+  selector:
+    matchLabels:
+      app: ms-usuarios
+  template:
+    metadata:
+      labels:
+        app: ms-usuarios
+    spec:
+      containers:
+        - name: ms-usuarios
+          # Usaremos GitHub Container Registry
+          image: ghcr.io/carlospatroner-boop/ms-usuarios:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi" # Límite duro para evitar cobros excesivos
+              cpu: "500m"
+          env:
+            # Conectamos a la BD que ya tienes en la VM (Asegúrate de que la VM acepte conexiones)
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://${AZURE_DB_HOST}:5432/ms_usuarios_db"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "postgres"
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: password
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: "update"
+      imagePullSecrets:
+        - name: ghcr-secret

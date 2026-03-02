@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-usuarios-service
+  namespace: default
+spec:
+  selector:
+    app: ms-usuarios
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer # Esto te dará una IP pública en Azure
