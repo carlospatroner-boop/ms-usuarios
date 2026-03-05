@@ -31,7 +31,7 @@ spec:
               memory: "512Mi" # Límite duro para evitar cobros excesivos
               cpu: "500m"
           env:
-            # Conectamos a la BD que ya tienes en la VM (Asegúrate de que la VM acepte conexiones)
+            # Conectamos a la BD
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://${AZURE_DB_HOST}:5432/ms_usuarios_db"
             - name: SPRING_DATASOURCE_USERNAME

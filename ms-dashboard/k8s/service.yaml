@@ -10,4 +10,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 5000
-  type: LoadBalancer # Esto te dará OTRA IP pública para el dashboard
+  type: LoadBalancer # OTRA IP pública para el dashboard

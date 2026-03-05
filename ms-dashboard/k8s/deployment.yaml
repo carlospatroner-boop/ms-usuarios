@@ -29,7 +29,7 @@ spec:
               memory: "128Mi"
               cpu: "200m"
           env:
-            # Aquí le decimos que busque al servicio Java por su nombre DNS interno
+            #  busque al servicio Java por su nombre DNS interno
             - name: API_URL
               value: "http://ms-usuarios-service:80/api/usuarios"
       imagePullSecrets:

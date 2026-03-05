@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # URL interna de Kubernetes (DNS del Cluster)
-# Apuntamos al endpoint correcto de tu API Java
+# Apuntamos al endpoint correcto
 API_URL = "http://ms-usuarios-service:80/api/entregas"
 
 @app.route('/')
